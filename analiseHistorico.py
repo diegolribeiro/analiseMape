@@ -9,10 +9,7 @@ import pacotes.graficoUtil as graficoutil
 import pacotes.indicadorErro as indic
 import pacotes.ajustedataframe as ajuste_data_frame
 from sklearn.metrics import mean_absolute_error
-import locale
 
-
-locale.setlocale(locale.LC_ALL, 'pt_BR')
 st.set_page_config(layout='wide')
 st.title('Analise de histórico e Previsão')
 
