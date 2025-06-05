@@ -1,7 +1,4 @@
 plotly
-numpy
-pandas
-dateutil
 sklearn
 datetime
 locale
