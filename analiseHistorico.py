@@ -226,26 +226,25 @@ if uploaded_file is not None:
                     filtro_data_decomposicao = datetime.now()
                     df_item_decomposicao = df_item_filtrado.query('DATA < @filtro_data_decomposicao').copy()
                     df_item_decomposicao = df_item_decomposicao.set_index('DATA')
-                    df_item_decomposicao
                     resultado = seasonal_decompose(df_item_decomposicao['QUANTIDADE_VENDA'], model='additive', period=12)
                     resultado1 = seasonal_decompose(df_item_decomposicao['QUANTIDADE_VENDA_AJUS_SO'], model='additive', period=12)
                     
 
                     # Criando subplots com plotly
-                    fig = sp.make_subplots(rows=4, cols=2, shared_xaxes=True,
+                    fig = sp.make_subplots(rows=4, cols=2, shared_xaxes=True, 
                                         subplot_titles=('Histórico Original', 'Histórico limpo Original', 'Tendência', 'Tendência Hist. Limpo', 'Sazonalidade', 'Sazonalidade Hist. Limpo', 'Resíduo', 'Resíduo Hist. Limpo'))
 
-                    fig.add_trace(go.Scatter(x=resultado.observed.index, y=resultado.observed, name='Histórico Original'), row=1, col=1)
-                    fig.add_trace(go.Scatter(x=resultado1.observed.index, y=resultado1.observed, name='Histórico limpo Original'), row=1, col=2) 
+                    fig.add_trace(go.Scatter(x=resultado.observed.index, y=resultado.observed, name='Histórico Original', showlegend=False), row=1, col=1)
+                    fig.add_trace(go.Scatter(x=resultado1.observed.index, y=resultado1.observed, name='Histórico limpo Original', showlegend=False), row=1, col=2) 
 
-                    fig.add_trace(go.Scatter(x=resultado.trend.index, y=resultado.trend, name='Tendência'), row=2, col=1)
-                    fig.add_trace(go.Scatter(x=resultado1.trend.index, y=resultado1.trend, name='Tendência Hist. Limpo'), row=2, col=2)
+                    fig.add_trace(go.Scatter(x=resultado.trend.index, y=resultado.trend, name='Tendência', showlegend=False), row=2, col=1)
+                    fig.add_trace(go.Scatter(x=resultado1.trend.index, y=resultado1.trend, name='Tendência Hist. Limpo', showlegend=False), row=2, col=2)
 
-                    fig.add_trace(go.Scatter(x=resultado.seasonal.index, y=resultado.seasonal, name='Sazonalidade'), row=3, col=1)
-                    fig.add_trace(go.Scatter(x=resultado1.seasonal.index, y=resultado1.seasonal, name='Sazonalidade Hist. Limpo'), row=3, col=2)
+                    fig.add_trace(go.Scatter(x=resultado.seasonal.index, y=resultado.seasonal, name='Sazonalidade', showlegend=False), row=3, col=1)
+                    fig.add_trace(go.Scatter(x=resultado1.seasonal.index, y=resultado1.seasonal, name='Sazonalidade Hist. Limpo', showlegend=False), row=3, col=2)
                     
-                    fig.add_trace(go.Scatter(x=resultado.resid.index, y=resultado.resid, name='Resíduo'), row=4, col=1)
-                    fig.add_trace(go.Scatter(x=resultado1.resid.index, y=resultado1.resid, name='Resíduo Hist. Limpo'), row=4, col=2)
+                    fig.add_trace(go.Scatter(x=resultado.resid.index, y=resultado.resid, name='Resíduo', showlegend=False), row=4, col=1)
+                    fig.add_trace(go.Scatter(x=resultado1.resid.index, y=resultado1.resid, name='Resíduo Hist. Limpo', showlegend=False), row=4, col=2)
 
                     fig.update_layout(height=900)
                     st.plotly_chart(fig)
