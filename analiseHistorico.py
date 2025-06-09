@@ -13,7 +13,7 @@ import locale
 import plotly.subplots as sp
 
 
-locale.setlocale(locale.LC_ALL, 'pt_BR')
+#locale.setlocale(locale.LC_ALL, 'pt_BR')
 st.set_page_config(layout='wide')
 st.title('Analise de histórico e Previsão')
 
